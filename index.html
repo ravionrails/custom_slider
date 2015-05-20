@@ -23,14 +23,11 @@
 					playSlide();
 				});
 
-				$('#slider > div video')
-					.on('play', function (e) {
-						_playSlide = false;
-					})
-
-					.on('pause', function (e) {
-						_playSlide = true;
-					})
+				$('#slider > div video').on({
+					play: function(e){ pauseSlide(); },
+					pause: function(e){ playSlide(); },
+					ended: function(e){ playSlide(); }
+				});
 
 			});
 
