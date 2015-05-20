@@ -12,7 +12,7 @@
 			var _playSlide = true;
 
 			$(document).ready(function(){
-				$('#slider img:first').fadeIn(300);
+				$('#slider > div:first').fadeIn(300);
 				playSlider();
 
 				$('#pause_me').click(function(){
@@ -23,16 +23,25 @@
 					playSlide();
 				});
 
+				$('#slider > div video')
+					.on('play', function (e) {
+						_playSlide = false;
+					})
+
+					.on('pause', function (e) {
+						_playSlide = true;
+					})
+
 			});
 
 			function playSlider(){
 				loop = setInterval(function(){
 					if( _playSlide ){
-						$( $('#slider img').get(_startSlide) ).fadeOut(300);
-						$( $('#slider img').get(_nextSlide) ).fadeIn(300);
+						$( $('#slider > div').get(_startSlide) ).fadeOut(300);
+						$( $('#slider > div').get(_nextSlide) ).fadeIn(300);
 						_startSlide = _nextSlide;
 						_nextSlide += 1;
-						if(_nextSlide == $('#slider img').length ){
+						if(_nextSlide == $('#slider > div').length ){
 							insertNextSet();
 						}
 					}
@@ -43,7 +52,7 @@
 				var imagesList = ['man', 'coffee_shop', 'gas_station'];
 				var imgEle = "";
 				$(imagesList).each(function(ind, ele){
-					imgEle +=  '<img src="' + 'images/'+ele+'.jpg" />'  ;
+					imgEle +=  '<div><img src="' + 'images/'+ele+'.jpg" /></div>';
 				});			
 				
 				$('#slider').append(imgEle);
@@ -67,9 +76,22 @@
     <br/><br/>
     <a id="play_me" style="cursor:pointer;" href="javascript:void(0);">Play me</a>
 		<div id="slider">
-	    <img src="images/coalesse.jpg" alt="Coalesse" data-href="http://www.google.com/" />
-	    <img src="images/laughing.jpg" alt="" />
-	    <img src="images/roof_shooting.jpg" alt="" />
+			<div>
+	    	<img src="images/coalesse.jpg" alt="Coalesse" />
+	    </div>
+	    <div>
+	    	<video width="600" controls="" id="video1">
+			    <source type="video/mp4" src="video/mov_bbb.mp4"></source>
+			    <!-- <source type="video/ogg" src="mov_bbb.ogg"></source> -->
+			    Your browser does not support HTML5 video.
+			  </video>
+	    </div>
+	    <div>
+	    	<img src="images/laughing.jpg" alt="" />
+	    </div>
+	    <div>
+	    	<img src="images/roof_shooting.jpg" alt="" />
+	  	</div>
 	  <!--   <img src="images/man.jpg" alt="" />
 	    <img src="images/coffee_shop.jpg" alt="" />
 	    <img src="images/gas_station.jpg" alt="" /> -->
