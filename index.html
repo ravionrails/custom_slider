@@ -5,93 +5,17 @@
 		<link href="css/slider.css" rel="stylesheet" />
 
 		<script src="js/jquery-1.11.3.min.js"></script>
+		<script src="js/app.js"></script>
 
-		<script>
-			var _startSlide = 0;
-			var _nextSlide = 1;
-			var _playSlide = true;
-
-			$(document).ready(function(){
-				$('#slider > div:first').fadeIn(300);
-				playSlider();
-
-				$('#pause_me').click(function(){
-					pauseSlide();
-				});
-
-				$('#play_me').click(function(){
-					playSlide();
-				});
-
-				$('#slider > div video').on({
-					play: function(e){ pauseSlide(); },
-					pause: function(e){ playSlide(); },
-					ended: function(e){ playSlide(); }
-				});
-
-			});
-
-			function playSlider(){
-				loop = setInterval(function(){
-					if( _playSlide ){
-						$( $('#slider > div').get(_startSlide) ).fadeOut(300);
-						$( $('#slider > div').get(_nextSlide) ).fadeIn(300);
-						_startSlide = _nextSlide;
-						_nextSlide += 1;
-						if(_nextSlide == $('#slider > div').length ){
-							insertNextSet();
-						}
-					}
-				}, 3000);
-			}
-
-			function insertNextSet(){
-				var imagesList = ['man', 'coffee_shop', 'gas_station'];
-				var imgEle = "";
-				$(imagesList).each(function(ind, ele){
-					imgEle +=  '<div><img src="' + 'images/'+ele+'.jpg" /></div>';
-				});			
-				
-				$('#slider').append(imgEle);
-			}
-
-			function pauseSlide(){
-				_playSlide = false;
-			}
-
-			function playSlide(){
-				_playSlide = true;
-			}
-
-		</script>
-
-
-		<!-- <link rel="stylesheet" href="css/maximage.css" type="text/css" media="screen" title="CSS" charset="utf-8" /> -->
 	</head>
 	<body>
 		<a id="pause_me" style="cursor:pointer;" href="javascript:void(0);">Pause me</a>
     <br/><br/>
     <a id="play_me" style="cursor:pointer;" href="javascript:void(0);">Play me</a>
 		<div id="slider">
-			<div>
-	    	<img src="images/coalesse.jpg" alt="Coalesse" />
-	    </div>
-	    <div>
-	    	<video width="600" controls="" id="video1">
-			    <source type="video/mp4" src="video/mov_bbb.mp4"></source>
-			    <!-- <source type="video/ogg" src="mov_bbb.ogg"></source> -->
-			    Your browser does not support HTML5 video.
-			  </video>
-	    </div>
-	    <div>
-	    	<img src="images/laughing.jpg" alt="" />
-	    </div>
-	    <div>
-	    	<img src="images/roof_shooting.jpg" alt="" />
-	  	</div>
-	  <!--   <img src="images/man.jpg" alt="" />
-	    <img src="images/coffee_shop.jpg" alt="" />
-	    <img src="images/gas_station.jpg" alt="" /> -->
+			<div id="imgContainer">
+	    	<img src="images/1.jpg" />
+	    </div>	    
 	</div>
 	</body>
 </html>
